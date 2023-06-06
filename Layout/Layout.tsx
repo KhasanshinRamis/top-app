@@ -4,7 +4,7 @@ import { Header } from './Header/Header';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer} from './Footer/Footer';
 import { FunctionComponent } from 'react';
-import { AppContexProvider, IAppContext } from '../context/app.contex';
+import { AppContextProvider, IAppContext } from '../context/app.contex';
 
 
 
@@ -25,11 +25,13 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 export const withLayout = <T extends Record<string, unknown> & IAppContext>(Component: FunctionComponent<T>) => {
 	return function withLayoutComponent(props: T):JSX.Element {
 		return (
-			<AppContexProvider menu={props.menu} firstCategory={props.firstCategory}>
+			//точка входа для обёртывания провайдера и исользования контекста 
+			//передаём начальные значения через props для contet
+			<AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
 				<Layout>
 					<Component {...props} />
 				</Layout>
-			</AppContexProvider>
+			</AppContextProvider>
 		);
 	};
 };
