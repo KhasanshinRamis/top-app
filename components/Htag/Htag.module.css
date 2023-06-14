@@ -6,10 +6,11 @@
 }
 
 .h2 {
+	margin-top: 50px;
+	margin-bottom: 20px;
 	font-weight: 500;
 	font-size: 22px;
 	line-height: 30px;
-	margin: 0;
 }
 
 .h3 {
@@ -18,3 +19,4 @@
 	line-height: 27px;
 	margin: 0;
 }
+

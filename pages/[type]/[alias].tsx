@@ -6,6 +6,7 @@ import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface'
 import { ParsedUrlQuery } from 'querystring';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
+import { TopPageComponent } from '../../page-components';
 
 
 //создали [type] динамические страницы
@@ -15,15 +16,15 @@ import { firstLevelMenu } from '../../helpers/helpers';
 
 //export default next понимает что эта точка входа в рендер странички
 //создаём подорку страниц курса
-function Course({ menu, page, products }: CourseProps): JSX.Element {
-	return (
-		<>
-			{products && products.length}
-		</>
-	);
+function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
+	return <TopPageComponent
+	firstCategory={firstCategory}
+	page={page}
+	products={products}
+	></TopPageComponent>;
 }
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 //т.к некст какие пути нам необходимо резолвить 
 //создаём пути
@@ -51,7 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 //получаем пропсы курса
 //алиас пролучаем через { params }: GetStaticPropsContext<ParsedUrlQuery>
-export const getStaticProps: GetStaticProps<CourseProps> = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
 	//если нет params, то возвращаем ошибку 404 
 	if (!params) {
 		return {
@@ -105,7 +106,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({ params }: Ge
 	}
 };
 
-interface CourseProps extends Record<string, unknown> {
+interface TopPageProps extends Record<string, unknown> {
 	menu: MenuItem[];
 	firstCategory: TopLevelCategory;
 	page: TopPageModel;
