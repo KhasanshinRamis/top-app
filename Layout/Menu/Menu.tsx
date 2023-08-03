@@ -83,6 +83,7 @@ export const Menu = (): JSX.Element => {
 			pages.map(p => (
 				<Link key={p._id} href={`/${route}/${p.alias}`}>
 					<span className={cn(styles.thirdLevel, {
+						//если '/${route}/${p.alias}' равен как путь 
 						[styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
 					})}>
 						{p.category}

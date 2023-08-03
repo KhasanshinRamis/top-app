@@ -1,9 +1,13 @@
 .tag{
 	display: inline-block;
 	box-sizing: border-box;
-	margin-right: 5px;
+	margin: 0px 5px 5px 0;
 	border-radius: 20px;
 	padding: 5px 12px;
+}
+
+.tag:last-child {
+	margin: 0px;
 }
 
 .small{
@@ -18,7 +22,7 @@
 
 
 .ghost{
-	border: 1px solid var(--grey-light);
+	border: 1px solid var(--gray-light);
 }
 
 
@@ -34,7 +38,7 @@
 	font-weight: bold;
 }
 
-.grean{
+.green{
 	color: var(--green);
 	background: var(--green-light);
 	font-weight: bold;

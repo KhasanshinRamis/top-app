@@ -17,9 +17,14 @@
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 27px;
-	margin: 0;
+	margin-bottom: 18px;
 }
 
+.seo p {
+	font-size: 16px;
+	line-height: 24px;
+	text-indent: 16 px;
+}
 
 
 .title {
@@ -44,3 +49,8 @@
 
 
 
+@media screen and (max-width: 640px) {
+	.title {
+		grid-template-columns: auto 1fr;
+	}
+}

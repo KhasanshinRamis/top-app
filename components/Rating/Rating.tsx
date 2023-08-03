@@ -2,10 +2,10 @@ import { RatingProps } from './Rating.props';
 import styles from './Rating.module.css';
 import cn from 'classnames';
 import StarIcon from './star.svg';
-import { useEffect, useState, KeyboardEvent } from 'react';
+import { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef } from 'react';
 
 
-export const Rating = ({ isEditable = true, rating, setRating, className, ...props}: RatingProps): JSX.Element => {
+export const Rating = forwardRef(({ isEditable = true, rating, setRating, error, className, ...props}: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 	// создаём через useState пустой массив звёздочек-рейтингов
 	const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>)); 
 	
@@ -64,7 +64,10 @@ export const Rating = ({ isEditable = true, rating, setRating, className, ...pro
 	};
 
 	return (
-		<div {...props}>
+		<div {...props} ref={ref} className={cn(styles.ratingWrapper, {
+			[styles.error]: error
+		})}>
 			{ratingArray.map((r, index) => (<span key={index}>{r}</span>))}
+			{error && <span className={styles.errorMessage}>{error.message}</span>}
 		</div>);
-};
+});

@@ -12,3 +12,19 @@
 .editable {
 	cursor: pointer;
 }
+
+.ratingWrapper {
+	position: relative;
+}
+
+
+.error svg {
+	fill: firebrick;
+}
+
+.errorMessage {
+	position: absolute;
+	bottom: -22px;
+	left: 2px;
+	color: var(--red);
+}

@@ -13,9 +13,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 		<div className={styles.wrapper}>
 			<Header className={styles.header}/>
 			<Sidebar className={styles.sidebar}/>
-				<div className={styles.body}>
-					{children}
-				</div>	
+			<div className={styles.body}>
+				{children}
+			</div>	
 			<Footer className={styles.footer}/>	
 		</div>
 	);
@@ -26,7 +26,7 @@ export const withLayout = <T extends Record<string, unknown> & IAppContext>(Comp
 	return function withLayoutComponent(props: T):JSX.Element {
 		return (
 			//точка входа для обёртывания провайдера и исользования контекста 
-			//передаём начальные значения через props для contet
+			//передаём начальные значения через props для content
 			<AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
 				<Layout>
 					<Component {...props} />

@@ -1,3 +1,7 @@
+.menu ul{
+	padding-left: 0;
+}
+
 .firstLevel {
 	margin-top: 20px;
 	display: grid;

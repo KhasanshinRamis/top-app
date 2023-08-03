@@ -7,6 +7,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { TopPageComponent } from '../../page-components';
+import { API } from '../../helpers/api';
 
 
 //создали [type] динамические страницы
@@ -34,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	for(const m of firstLevelMenu){
 		//получаем данные меню первого уровня
-		const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+		const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
 			firstCategory: m.id
 		});
 		//закидываем созданные пути в массив путей
@@ -46,6 +47,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	//отображаем эти пути
 	return {
 		paths,
+		// если после эта билда захотим создать новый путь страницы, которой не было в бэке, то fallback: true -
+		//автоматически создаст новые пути страниц
+		// возможность создавать неограниченное количество страниц
 		fallback: true
 	};
 };
@@ -72,7 +76,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
 
 	try {
 		//получаем данные меню
-		const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+		const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
 			firstCategory: firstCategoryItem.id
 		});
 
@@ -83,10 +87,10 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
 		}
 
 		//получаем данные страницы через params.alias
-		const { data: page } = await axios.get<TopPageModel>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/byAlias/' + params.alias);
+		const { data: page } = await axios.get<TopPageModel>(API.topPage.byAlias + params.alias);
 
 		//получаем данные продукта
-		const { data: products } = await axios.post<ProductModel[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find', {
+		const { data: products } = await axios.post<ProductModel[]>(API.product.find, {
 			category: page.category,
 			limit: 10
 		});

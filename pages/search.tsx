@@ -1,7 +1,8 @@
-import { withLayout } from '../Layout/Layout';
 import { GetStaticProps } from 'next';
+import { withLayout } from '../Layout/Layout';
 import axios from 'axios';
 import { MenuItem } from '../interfaces/menu.interface';
+import { API } from '../helpers/api';
 
 //страница для сёрча
 
@@ -19,9 +20,10 @@ export default withLayout(Search);
 
 // Получаем пропсы через http запросы
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+	//какая категория по дефолту будет сгенерирована
 	const firstCategory = 0;
 	//получаем результат post запроса 
-	const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+	const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find , {
 		firstCategory
 	});
 	return {

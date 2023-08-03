@@ -23,7 +23,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: var(--black);
-	font-family: 'Noto Sans', sans-serif;
+	font-family: var(--font-family), sans-serif;
 	background: #F5F6F8;
 
 }
@@ -41,11 +41,13 @@ a {
 :root {
 	--black: #3B434E; 
 	--white: #FFF;
+	--gray: #A4A4A4;
 	--gray-light: #EBEBEB;
 	--gray-dark: #787D85;
 	--primary: #7653FC;
 	--primary-hover: #452ab2;
 	--red: #FC836D;
+	--red-light: #fea291;
 	--green: #1DC37E;
 	--green-light: #C8F8E4;
 	--font-family: 'Noto Sans', sans-serif;

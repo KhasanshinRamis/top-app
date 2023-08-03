@@ -5,6 +5,14 @@
 	align-items: center;
 	margin-bottom: 30px;
 }
+
+
+.advantage svg g {
+	width: 24px;
+	height: 24px;
+	z-index: 99;
+}
+
 .title {
 	font-weight: bold;
 }
