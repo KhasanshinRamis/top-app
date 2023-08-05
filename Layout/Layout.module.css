@@ -8,19 +8,19 @@
 	gap: 40px 30px;
 	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
 	grid-template-rows: auto 1fr auto;
+
 	@media (max-width: 830px) {
 		grid-template-areas: 
 		"header"
 		"body"
 		"footer";
 		grid-template-columns: minmax(320px, 1fr);
-		grid-template-rows: auto 1fr auto;
+		gap: 10px;
 	}
+
 }
 
 .header {
-	grid-area: header;
-	display: none;
 	@media (max-width: 830px){
 		display: block;
 	}	

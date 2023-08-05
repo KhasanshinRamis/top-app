@@ -8,7 +8,6 @@ import { sortReducer } from './sort.reducer';
 import Link from 'next/link';
 
 
-
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
 
 	const [{products: sortedProducts, sort}, dispathSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
@@ -31,7 +30,8 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
 
 			<div role='list' className={styles.sortProducts}>
 				{/* продукты запихнули в state и когда происходит setSort меняем state через dispathSort*/}
-				{sortedProducts && sortedProducts.map(p => (<Product key={p._id} product={p}/>))}
+				{/* при измение layout автоматически будет анимироваться Product */}
+				{sortedProducts && sortedProducts.map(p => (<Product layout key={p._id} product={p}/>))}
 			</div>
 
 			{firstCategory == TopLevelCategory.Courses && page.hh &&

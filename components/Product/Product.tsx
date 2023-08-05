@@ -4,14 +4,20 @@ import {Card, Rating, Tag, Button, Divider, Review, ReviewForm} from '../index';
 import Image from 'next/image';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 import cn from 'classnames';
-import { useRef, useState } from 'react';
+import { ForwardedRef, forwardRef, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 
 
-export const Product = ({ product,className, ...props }: ProductProps): JSX.Element => {
+export const Product = motion(forwardRef(({ product,className, ...props }: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 	
 	const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
 	const reviewRef = useRef<HTMLDivElement>(null);
+
+	const variants = {
+		visible: { opacity: 1, height: 'auto'},
+		hidden: { opacity: 0, height: 0}
+	};
 
 	// при нажатии на отзывы будет скролить вниз к самим отзывам
 	const scrollToReview = () => {
@@ -23,7 +29,7 @@ export const Product = ({ product,className, ...props }: ProductProps): JSX.Elem
 	};
 
 	return (
-		<div className={className} {...props}>
+		<div className={className} {...props} ref={ref}>
 			<Card className={styles.product}>
 				{/* Шапка продукта */}
 				<div className={styles.logo}>
@@ -101,26 +107,24 @@ export const Product = ({ product,className, ...props }: ProductProps): JSX.Elem
 				</div>
 
 			</Card>	
+			<motion.div animate={isReviewOpened ? 'visible' : 'hidden'} variants={variants} initial='hidden'>
+				<Card 
+					color='blue' 
+					className={cn(styles.reviews)}
+					ref={reviewRef}
+				>
+					
+					{product.reviews.map(r => (
+						<div key={r._id}>
+							<Review review={r} />
+							<Divider />
+						</div>	
+					))}
 
-			<Card 
-				color='blue' 
-				className={cn(styles.reviews, {
-					[styles.opened]: isReviewOpened,
-					[styles.closed]: !isReviewOpened
-				})}
-				ref={reviewRef}
-			>
-				
-				{product.reviews.map(r => (
-					<div key={r._id}>
-						<Review review={r} />
-						<Divider />
-					</div>	
-				))}
-
-				<ReviewForm productId={product._id}/>
-				
-			</Card>
+					<ReviewForm productId={product._id}/>
+					
+				</Card>
+			</motion.div>
 		</div>
 );
-};
+}));
