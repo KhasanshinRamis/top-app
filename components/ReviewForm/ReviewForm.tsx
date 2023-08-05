@@ -21,18 +21,14 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
 	const [error, setError] = useState<string>();
 
 	const onSubmit = async (formData: IReviewForm) => {
-		try {
+
 			const { data } = await axios.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId });
 			if (data.message) {
 				setIsSuccess(true);
 				reset();
 			}
-		} 
-		catch (error) {
-			setError(e.message);
-		}
 	};
-
+	
 	return (
 		// в onSubmit={handleSubmit()} вызывается после нажатии на submit
 		<form onSubmit={handleSubmit(onSubmit)}>
