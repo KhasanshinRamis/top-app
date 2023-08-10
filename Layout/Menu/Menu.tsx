@@ -19,7 +19,7 @@ export const Menu = (): JSX.Element => {
 	//варианты анимации меню
 	const variants = {
 		visible: {
-			marginBottom: 10,
+			marginBottom: 5,
 			transition: {
 				when: 'beforeChildren',
 				staggerChildren: 0.01
@@ -59,16 +59,16 @@ export const Menu = (): JSX.Element => {
 		<>
 			{firstLevelMenu.map(m => (
 				<div key={m.route}>
-					<Link href={`/${m.route}`}>
-						<span className={cn(styles.firstLevel, {
+					<Link 
+						href={`/${m.route}`} 
+						className={cn(styles.firstLevel, {
 							//активная ссылка
 							[styles.firstLevelActive]: m.id == firstCategory
-						})}>
+						})}>					
 							{/* svg иконки */}
 							{m.icon}
 							{/* название вкладки меню */}
 							<span>{m.name}</span>
-						</span>
 					</Link>
 					{/* следующиц уровень меню */}
 					{m.id == firstCategory && buildSecondLevel(m)}
@@ -118,11 +118,14 @@ export const Menu = (): JSX.Element => {
 					variants={variantsChildren}
 					key={p._id}
 				>
-					<Link href={`/${route}/${p.alias}`}>
-						<span className={cn(styles.thirdLevel, {
+					<Link 
+						href={`/${route}/${p.alias}`}
+						className={cn(styles.thirdLevel, {
 							//если '/${route}/${p.alias}' равен как путь 
 							[styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath
-						})}>
+						})}
+					>
+						<span >
 							{p.category}
 						</span>
 					</Link>
