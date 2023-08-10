@@ -2,72 +2,99 @@ import { RatingProps } from './Rating.props';
 import styles from './Rating.module.css';
 import cn from 'classnames';
 import StarIcon from './star.svg';
-import { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef } from 'react';
+import { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef, useRef } from 'react';
 
 
-export const Rating = forwardRef(({ isEditable = true, rating, setRating, error, className, ...props}: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const Rating = forwardRef(({ isEditable = false, rating, setRating, error, tabIndex, ...props}: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 	// создаём через useState пустой массив звёздочек-рейтингов
 	const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>)); 
 	
+	const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
+
 	//при один раз взаимодействии с рейтингом вызывается useEffect
 	useEffect(() => {
 		constructRating(rating);
-	}, [rating]);
+	}, [rating, tabIndex]);
+
+
+	const computeFocus = (r: number, i: number) => {
+		if (!isEditable) {
+			return -1;
+		}
+		if (!rating && i == 0) {
+			return tabIndex ?? 0;
+		} 
+		if ( r == i + 1) {
+			return tabIndex ?? 0;
+		}
+		return -1;
+	};
 
 	const constructRating = (currentRating: number) => {
-		const updatedArray = ratingArray.map((r: JSX.Element, index: number) =>{
+		const updatedArray = ratingArray.map((r: JSX.Element, i: number) =>{
 			return (
 				<span
 					className={cn(styles.star, {
-						[styles.filled]: index < currentRating,
+						[styles.filled]: i < currentRating,
 						[styles.editable]: isEditable
 					})}
 					// событие при наведении на рейтинг-звёздочки
-					onMouseEnter={() => changeDisplay(index + 1)}
+					onMouseEnter={() => changeDisplay(i + 1)}
 					//событие после наведения на рейтинг-звёздочки
 					onMouseLeave={() => changeDisplay(rating)}
 					//событие при клике на рейтинг-звёздочки
-					onClick={() => onClickRating(index + 1)}
+					onClick={() => onClickRating(i + 1)}
+					//переход через табиндекс
+					tabIndex={computeFocus(rating, i)}
+					//обработка нажатия через клавишу
+					onKeyDown={handleKey}
+					ref={r => ratingArrayRef.current?.push(r)}
 				>	
-					<StarIcon
-						//переход через табиндекс
-						tabIndex={isEditable ? 0 : -1}
-						//обработка нажатия через клавишу
-						onKeyDown={(event: KeyboardEvent<SVGElement>) => isEditable && HandleSpace(index + 1, event)}
-					/>
+					<StarIcon/>
 				</span>
 			);
 		});
 		setRatingArray(updatedArray);
 	};
 
-	const HandleSpace = (index: number, event: KeyboardEvent<SVGElement>) => {
-		//только на клавишу пробел будет срабатывать событие и когда есть setRating, т.е не underfiend
-		if(event.code != 'Space' || !setRating) {
+	const handleKey = (e: KeyboardEvent) => {
+		if (!isEditable || !setRating) {
 			return;
 		}
-		setRating(index);
+		if (e.code == 'ArrowRight' || e.code == 'ArrowUp') {
+			if (!rating) {
+				setRating(1);
+			} else {
+				e.preventDefault();
+				setRating(rating < 5 ? rating + 1 : 5);
+			}
+			ratingArrayRef.current[rating]?.focus();
+		}
+		if (e.code == 'ArrowLeft' || e.code == 'ArrowDown') {
+			e.preventDefault();
+			setRating(rating > 1 ? rating - 1 : 1);
+		}
 	};
 	
-	const onClickRating = (index: number) => {
+	const onClickRating = (i: number) => {
 		if(!isEditable || !setRating){
 			return;
 		}
-		setRating(index);
+		setRating(i);
 	};
 
-	const changeDisplay = (index: number) => {
+	const changeDisplay = (i: number) => {
 		if(!isEditable){
 			return;
 		}
-		constructRating(index);
+		constructRating(i);
 	};
 
 	return (
 		<div {...props} ref={ref} className={cn(styles.ratingWrapper, {
 			[styles.error]: error
 		})}>
-			{ratingArray.map((r, index) => (<span key={index}>{r}</span>))}
+			{ratingArray.map((r, i) => (<span key={i}>{r}</span>))}
 			{error && <span className={styles.errorMessage}>{error.message}</span>}
 		</div>);
 });

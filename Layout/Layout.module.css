@@ -35,6 +35,7 @@
 
 .body {
 	grid-area: body;
+	outline: none;
 	@media (max-width: 830px) {
 		padding: 20px;
 	}
@@ -45,4 +46,20 @@
 
 .footer {
 	grid-area: footer;
+}
+
+
+.skipLink {
+	display: block;
+	position: fixed;
+	left: 100px;
+	top: 0;
+	overflow: hidden;
+	height: 0;
+	background: var(--primary);
+	color: var(--white)
+}
+
+.displayed {
+	height: auto;
 }

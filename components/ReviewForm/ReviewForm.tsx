@@ -10,7 +10,7 @@ import { API } from '../../helpers/api';
 import { useState } from 'react';
 
 
-export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps): JSX.Element => {
+export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProps): JSX.Element => {
 
 	// register - для регистрации формы
 	// control - для регистрации управляемых компонентов
@@ -37,16 +37,18 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
 			>
 				{/* register('name') привязка неуправляемых компонентов к форме */}
 				<Input 
-				{...register('name', {required: {value: true, message: "Заполните имя"}})} 
-				className={styles.name} 
-				placeholder='Имя'
-				error={errors.name}
+					{...register('name', {required: {value: true, message: "Заполните имя"}})} 
+					className={styles.name} 
+					placeholder='Имя'
+					error={errors.name}
+					tabIndex={isOpened ? 0 : -1}
 				/>
 
-				<Input {...register('title', {required: {value: true, message: "Заполните заголовок"}})} 
-				className={styles.title} 
-				placeholder='Заголовок отзыва' 
-				error={errors.title}
+				<Input 
+					{...register('title', {required: {value: true, message: "Заполните заголовок"}})} 
+					className={styles.title} 
+					placeholder='Заголовок отзыва' 
+					error={errors.title}
 				/>
 
 
@@ -67,7 +69,8 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
 								ref={field.ref} 
 								setRating={field.onChange}
 								error={errors.rating}
-								/>
+								tabIndex={isOpened ? 0 : -1}
+							/>
 						)}
 					/>	
 				</div>
@@ -77,11 +80,17 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
 					className={styles.description} 
 					placeholder='Текст отзыва'
 					error={errors.description} 
+					tabIndex={isOpened ? 0 : -1}
 				/>
 
 				<div className={styles.submit}>
-					<Button appearance='primary' className={styles.reviewFormButton}>Отправить</Button>
-
+					<Button 
+						appearance='primary' 
+						className={styles.reviewFormButton}
+						tabIndex={isOpened ? 0 : -1}
+					>
+						Отправить
+					</Button>
 					<span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
 				</div>
 			</div>
