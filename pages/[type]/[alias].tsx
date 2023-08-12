@@ -8,6 +8,7 @@ import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { TopPageComponent } from '../../page-components';
 import { API } from '../../helpers/api';
+import Head from 'next/head';
 
 
 //создали [type] динамические страницы
@@ -18,11 +19,23 @@ import { API } from '../../helpers/api';
 //export default next понимает что эта точка входа в рендер странички
 //создаём подорку страниц курса
 function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
-	return <TopPageComponent
-	firstCategory={firstCategory}
-	page={page}
-	products={products}
-	></TopPageComponent>;
+	return (
+		<>
+			<Head>
+				<title>{page.metaTitle}</title>
+				<meta name='description' content={page.metaDescription}/>
+				<meta property='og:title' content={page.metaTitle}/>
+				<meta property='og:description' content={page.metaDescription}/>
+				<meta property='og:type' content='article'/>
+				
+			</Head>
+			<TopPageComponent
+				firstCategory={firstCategory}
+				page={page}
+				products={products}
+			/>
+		</>
+	);
 }
 
 export default withLayout(TopPage);

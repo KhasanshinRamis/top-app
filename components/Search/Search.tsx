@@ -32,22 +32,28 @@ export const Search = ({ className, ...props}: SearchProps): JSX.Element => {
 		}
 	};
 
-	return <div className={cn(className, styles.search)} {...props}>
-		<Input
-			className={styles.input}
-			placeholder="Поиск..."
-			//будем сохранять данные которые вводит пользователь в state
-			value={search}
-			//при изменения делаем update value
-			onChange={(e) => setSearch(e.target.value)}
-			onKeyDown={handleKeyDown}
-		/>
-		<Button
-			appearance="primary"
-			className={styles.button}
-			onClick={goToSearch}
-		>
-			<GlassIcon/>
-		</Button>
-	</div>;
+	return (
+		<form 
+			className={cn(className, styles.search)}
+			role="search" 
+			{...props}>
+			<Input
+				className={styles.input}
+				placeholder="Поиск..."
+				//будем сохранять данные которые вводит пользователь в state
+				value={search}
+				//при изменения делаем update value
+				onChange={(e) => setSearch(e.target.value)}
+				onKeyDown={handleKeyDown}
+			/>
+			<Button
+				appearance="primary"
+				className={styles.button}
+				onClick={goToSearch}
+				arial-label="Искать по сайту"
+			>
+				<GlassIcon/>
+			</Button>
+		</form>
+	);
 };

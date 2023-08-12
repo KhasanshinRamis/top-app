@@ -1,7 +1,3 @@
-.menu ul{
-	padding-left: 0;
-}
-
 .firstLevel {
 	margin-top: 20px;
 	display: grid;
@@ -11,6 +7,11 @@
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 25px;
+}
+
+.firstLevelList {
+	list-style: none;
+	padding: 0;
 }
 
 .firstLevelActive,
@@ -27,13 +28,16 @@
 }
 
 .secondBlock {
+	list-style: none;
 	margin: 15px 0px 0px 12px;
-	padding-left: 32px;
+	padding: 0px 0px 0px 32px;
 	border-left: 1px solid #DFDFDF;
 }
 
 .secondLevelBlock {
+	list-style: none;
 	overflow: hidden;
+	padding: 0;
 }
 
 
@@ -45,6 +49,9 @@
 	font-weight: 300;
 	font-size: 12px;
 	line-height: 16px;
+	background: none;
+	border: none;
+	padding: 0;
 }
 
 .thirdLevel {

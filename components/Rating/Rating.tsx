@@ -38,17 +38,23 @@ export const Rating = forwardRef(({ isEditable = false, rating, setRating, error
 						[styles.filled]: i < currentRating,
 						[styles.editable]: isEditable
 					})}
+					//переход через табиндекс
+					tabIndex={computeFocus(rating, i)}
+					//обработка нажатия через клавишу
+					onKeyDown={handleKey}
+					ref={r => ratingArrayRef.current?.push(r)}
+					role={isEditable ? 'slider' : ''}
+					aria-invalid={error ? true : false}
+					aria-valuenow={rating}
+					aria-valuemax={5}
+					aria-valuemin={1}
+					aria-label={isEditable ? 'Укажите рейтинг' : ('рейтинг' + rating)}
 					// событие при наведении на рейтинг-звёздочки
 					onMouseEnter={() => changeDisplay(i + 1)}
 					//событие после наведения на рейтинг-звёздочки
 					onMouseLeave={() => changeDisplay(rating)}
 					//событие при клике на рейтинг-звёздочки
 					onClick={() => onClickRating(i + 1)}
-					//переход через табиндекс
-					tabIndex={computeFocus(rating, i)}
-					//обработка нажатия через клавишу
-					onKeyDown={handleKey}
-					ref={r => ratingArrayRef.current?.push(r)}
 				>	
 					<StarIcon/>
 				</span>
@@ -95,6 +101,6 @@ export const Rating = forwardRef(({ isEditable = false, rating, setRating, error
 			[styles.error]: error
 		})}>
 			{ratingArray.map((r, i) => (<span key={i}>{r}</span>))}
-			{error && <span className={styles.errorMessage}>{error.message}</span>}
+			{error && <span role='alert' className={styles.errorMessage}>{error.message}</span>}
 		</div>);
 });

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+	"prepare": "husky install",
     "dev": "next dev",
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
@@ -18,7 +19,8 @@
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.45.2"
+    "react-hook-form": "^7.45.2",
+    "react-yandex-metrika": "^2.6.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
@@ -29,6 +31,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
     "typescript": "^5.0.4"
   }
 }

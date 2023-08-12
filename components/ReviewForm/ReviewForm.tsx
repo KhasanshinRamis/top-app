@@ -15,7 +15,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 	// register - для регистрации формы
 	// control - для регистрации управляемых компонентов
 	// handleSubmit -- нажатие на клавишу 
-	const { register, control, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
+	const { register, control, handleSubmit, formState: { errors }, reset, clearErrors } = useForm<IReviewForm>();
 
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
@@ -42,6 +42,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 					placeholder='Имя'
 					error={errors.name}
 					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={errors.name ? true : false}
 				/>
 
 				<Input 
@@ -49,6 +50,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 					className={styles.title} 
 					placeholder='Заголовок отзыва' 
 					error={errors.title}
+					aria-invalid={errors.title ? true : false}
 				/>
 
 
@@ -81,6 +83,8 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 					placeholder='Текст отзыва'
 					error={errors.description} 
 					tabIndex={isOpened ? 0 : -1}
+					aria-label='Текст отзыва'
+					aria-invalid={errors.description ? true : false}
 				/>
 
 				<div className={styles.submit}>
@@ -88,6 +92,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 						appearance='primary' 
 						className={styles.reviewFormButton}
 						tabIndex={isOpened ? 0 : -1}
+						onClick={() => clearErrors( )}
 					>
 						Отправить
 					</Button>
@@ -95,22 +100,35 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
 				</div>
 			</div>
 
-			{isSuccess && <div className={cn(styles.panel, styles.success)}>
+			{isSuccess && <div className={cn(styles.panel, styles.success)} role='alert'>
 
 				<div className={styles.successTitle}>Ваш отзыв отправлен</div>
 				<div>
 					Спасиб, ваш отзыв будет опубликован после проверки!				
 				</div>
-
-				<CloseIcon className={styles.close} onClick={() => (setIsSuccess(false))}/>
+				<button
+					className={styles.close}
+					onClick={() => (setIsSuccess(false))}
+					aria-label='Закрыть оповещание'
+				>
+					<CloseIcon/>
+				</button>
+				
 
 			</div>}
 
 			
-			{error && <div className={cn(styles.panel, styles.error)}>	
+			{error && <div className={cn(styles.panel, styles.error)}  role='alert'>	
 
 				Что-то пошло не так, попробуйте обновить страницу
-				<CloseIcon className={styles.close} onClick={() => (setError(undefined))}/>
+				<button  
+					className={styles.close} 
+					onClick={() => (setError(undefined))}
+					aria-label='Закрыть оповещание'
+				>
+					<CloseIcon/>
+				</button>
+				
 
 			</div>}
 

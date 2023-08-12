@@ -6,11 +6,15 @@ import { SortEnum } from '../../components/Sort/Sort.props';
 import { useReducer,useEffect } from 'react';
 import { sortReducer } from './sort.reducer';
 import Link from 'next/link';
+import { useReducedMotion } from 'framer-motion';
 
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
 
 	const [{products: sortedProducts, sort}, dispathSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
+	
+	//уменьшение движения анимации
+	const shouldReducerMotion = useReducedMotion();
 
 	const setSort = (sort: SortEnum) => {
 		dispathSort({ type: sort});
@@ -24,14 +28,14 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
 		<div className={styles.wrapper}>
 			<div className={styles.title}>
 				<Htag tag='h1'>{page.title}</Htag>
-				{products && <Tag color='grey' size='medium'>{products.length}</Tag>}
+				{products && <Tag color='grey' size='medium' aria-label={products.length + 'элементов'}>{products.length}</Tag>}
 				<Sort sort={sort} setSort={setSort}/>
 			</div>
 
 			<div role='list' className={styles.sortProducts}>
 				{/* продукты запихнули в state и когда происходит setSort меняем state через dispathSort*/}
 				{/* при измение layout автоматически будет анимироваться Product */}
-				{sortedProducts && sortedProducts.map(p => (<Product layout key={p._id} product={p}/>))}
+				{sortedProducts && sortedProducts.map(p => (<Product role='listitem' layout={shouldReducerMotion ? false : true} key={p._id} product={p}/>))}
 			</div>
 
 			{firstCategory == TopLevelCategory.Courses && page.hh &&
