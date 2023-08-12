@@ -1,5 +1,6 @@
 .filled svg {
 	fill: var(--primary);
+
 	transition: all 0.2s ease-in-out;
 }
 
@@ -29,5 +30,6 @@
 	position: absolute;
 	bottom: -22px;
 	left: 2px;
+
 	color: var(--red);
 }

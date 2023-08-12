@@ -14,7 +14,8 @@ a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;} */
-/*--------------------*/
+
+/* -------------------- */
 
 
 
@@ -22,9 +23,11 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+
 	color: var(--black);
-	font-family: var(--font-family), sans-serif;
 	background: #F5F6F8;
+
+	font-family: var(--font-family), sans-serif;
 
 }
 
@@ -39,10 +42,12 @@ a {
 }
 
 .visualyHidden {
+	position: absolute;
+
+	overflow: hidden;
+
 	width: 0;
 	height: 0;
-	overflow: hidden;
-	position: absolute;
 }
 
 :root {
@@ -50,12 +55,12 @@ a {
 	--white: #FFF;
 	--gray: #A4A4A4;
 	--gray-light: #EBEBEB;
-	--gray-dark: #6c7077;
-	--primary: #7351f5;
-	--primary-hover: #452ab2;
+	--gray-dark: #6C7077;
+	--primary: #7351F5;
+	--primary-hover: #452AB2;
 	--red: #FC836D;
-	--red-light: #fea291;
-	--green: #007b48;
+	--red-light: #FEA291;
+	--green: #007B48;
 	--green-light: #C8F8E4;
 	--font-family: 'Noto Sans', sans-serif;
 }

@@ -1,16 +1,18 @@
 .review {
 	display: grid;
-	grid-template-columns: [start] auto 1fr auto auto [end];
-	gap: 10px;
 	align-items: center;
 
-	line-height: 24px;
 	margin-bottom: 20px;
+
+	line-height: 24px;
+	grid-template-columns: [start] auto 1fr auto auto [end];
+	gap: 10px;
 }
 
 .name {
-	font-weight: bold;
 	margin-right: 10px;
+
+	font-weight: bold;
 }
 
 .date {
@@ -21,7 +23,7 @@
 	grid-column: start / end;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (width <= 640px) {
 	.review {
 		grid-template-columns: [start] 30px [titlestart] auto [dateend] 1fr [end];	
 	}

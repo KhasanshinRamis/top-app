@@ -1,9 +1,10 @@
 .reviewForm {
+	display: grid;
+	align-items: center;
+
 	font-size: 14px;
 	line-height: 24px;
-	display: grid;
 	grid-template-columns: [start] auto 1fr auto [end];
-	align-items: center;
 	gap: 20px 30px;
 }
 
@@ -26,9 +27,11 @@
 }
 
 .panel {
+	position: relative;
+
 	margin-top: 20px;
 	padding: 20px;
-	position: relative;
+
 	border-radius: 5px;
 }
 
@@ -54,31 +57,34 @@
 	position: absolute;
 	top: 20px;
 	right: 20px;
+
 	border: none;
 	background: none;
 }
 
-@media screen and (max-width: 1180px) {
+@media screen and (width <= 1180px) {
 	.reviewForm {
 		grid-template-columns: [start] auto 1fr [end];
 	}
 }
 
-@media screen and (max-width: 1040px) {
+@media screen and (width <= 1040px) {
 	.submit{
 		display: grid;
 		grid-template-columns: 1fr;
 	}
+
 	.reviewFormButton {
 		margin-bottom: 10px;
 	}
 }
 
-@media screen and (max-width: 1040px) {
+@media screen and (width <= 1040px) {
 	.reviewForm {
 		grid-template-columns: [start] 1fr [end];
 
 	}
+
 	.title {
 		justify-self : initial;
 	}

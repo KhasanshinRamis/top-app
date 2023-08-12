@@ -1,19 +1,16 @@
 .wrapper {
-	min-height: 100vh;
 	display: grid;
-	grid-template-areas: 
-	". header header ."
-	". sidebar body ."
-	"footer footer footer footer";
-	gap: 40px 30px;
-	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
-	grid-template-rows: auto 1fr auto;
 
-	@media (max-width: 830px) {
+	min-height: 100vh;
+	grid-template: 
+	". header header ." auto ". sidebar body ." 1fr "footer footer footer footer" auto / auto 230px minmax(320px, 1200px) auto;
+	gap: 40px 30px;
+
+	@media (width <= 830px) {
 		grid-template-areas: 
-		"header"
-		"body"
-		"footer";
+			"header"
+			"body"
+			"footer";
 		grid-template-columns: minmax(320px, 1fr);
 		gap: 10px;
 	}
@@ -21,25 +18,29 @@
 }
 
 .header {
-	@media (max-width: 830px){
+	@media (width <= 830px){
 		display: block;
 	}	
 }
 
 .sidebar {
 	grid-area: sidebar;
-	@media (max-width: 830px) {
+
+	@media (width <= 830px) {
 		display: none !important;
 	}
 }
 
 .body {
 	grid-area: body;
+
 	outline: none;
-	@media (max-width: 830px) {
+
+	@media (width <= 830px) {
 		padding: 20px;
 	}
-	@media (max-width: 350px) {
+
+	@media (width <= 350px) {
 		padding-right: 5px;
 	}
 }
@@ -49,15 +50,18 @@
 }
 
 
-.skipLink {
-	display: block;
+.skip-link {
 	position: fixed;
-	left: 100px;
 	top: 0;
+	left: 100px;
+
+	display: block;
 	overflow: hidden;
+
 	height: 0;
-	background: var(--primary);
-	color: var(--white)
+
+	color: var(--white);
+	background: var(--primary)
 }
 
 .displayed {

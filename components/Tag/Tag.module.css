@@ -1,13 +1,15 @@
 .tag{
 	display: inline-block;
+
 	box-sizing: border-box;
-	margin: 0px 5px 5px 0;
-	border-radius: 20px;
+	margin: 0 5px 5px 0;
 	padding: 5px 12px;
+
+	border-radius: 20px;
 }
 
 .tag:last-child {
-	margin: 0px;
+	margin: 0;
 }
 
 .small{
@@ -29,18 +31,21 @@
 .red{
 	color: var(--white);
 	background: #DE0000;
+
 	font-weight: bold;
 }
 
 .grey{
 	color: var(--white);
-	background: #8a99b7;
+	background: #8A99B7;
+
 	font-weight: bold;
 }
 
 .green{
 	color: var(--green);
 	background: var(--green-light);
+
 	font-weight: bold;
 }
 

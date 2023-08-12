@@ -4,12 +4,14 @@
 
 .active .sortIcon {
 	display: block;
+
 	margin-right: 8px;
 }
 
 .active  {
-	font-weight: bold;
 	color: var(--primary);
+
+	font-weight: bold;
 }
 
 .sort {
@@ -20,15 +22,18 @@
 
 .sort button {
 	display: grid;
-	grid-template-columns: 20px 1fr;
-	gap: 8px;
 	align-items: center;
+
 	cursor: pointer;
+
 	border: none;
 	background: none;
+
 	font-size: 16px;
-	font-style: normal;
 	font-weight: 700;
+	font-style: normal;
+	grid-template-columns: 20px 1fr;
+	gap: 8px;
 }
 
 .sort button:not(.active) {

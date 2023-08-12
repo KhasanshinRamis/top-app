@@ -16,6 +16,7 @@
 
 .primary svg * {
 	fill: var(--white);
+
 	text-align: center;
 }
 
