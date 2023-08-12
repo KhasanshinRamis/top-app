@@ -1,7 +1,6 @@
 import { ProductProps } from './Product.props';
 import styles from './Product.module.css';
 import {Card, Rating, Tag, Button, Divider, Review, ReviewForm} from '../index';
-import Image from 'next/image';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 import cn from 'classnames';
 import { ForwardedRef, forwardRef, useRef, useState } from 'react';
@@ -35,7 +34,7 @@ export const Product = motion(forwardRef(({ product,className, ...props }: Produ
 				{/* Шапка продукта */}
 				<div className={styles.logo}>
 					
-					<Image
+					<img
 						src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
 						alt={product.title}
 						width={70}
