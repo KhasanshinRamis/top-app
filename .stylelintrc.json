@@ -9,6 +9,8 @@
 	"rules": {
 		"indentation": "tab",
 		"color-hex-case": "upper",
-		"selector-class-pattern": null
+		"selector-class-pattern": null,
+		"declaration-block-single-line-max-declarations": null,
+		"no-descending-specificity": null
 	}
 }

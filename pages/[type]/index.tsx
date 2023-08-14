@@ -13,7 +13,7 @@ function Type({ firstCategory }: TypeProps): JSX.Element {
 
 	return (
 		<>
-			Type: {firstCategory}
+			Type: {firstCategory}	
 		</>
 	);
 }
