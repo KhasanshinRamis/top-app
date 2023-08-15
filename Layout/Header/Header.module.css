@@ -3,6 +3,13 @@
 	
 }
 
+.menuOpen {
+	position: absolute;
+	z-index: 10;
+	top: 20px;
+	right: 20px;
+}
+
 .mobileMenu {
 	position: fixed;
 	z-index: 10;
