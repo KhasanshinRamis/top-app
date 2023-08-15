@@ -40,6 +40,7 @@ export const Menu = (): JSX.Element => {
 		},
 		hidden: {
 			opacity: 0,
+			minHeight: 0,
 			maxHeight: 0
 		}
 	};
